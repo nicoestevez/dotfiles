@@ -11,6 +11,8 @@ return {
     indent = { enabled = true }, -- indentation guides
     notifier = { enabled = true }, -- vim.notify with a nicer popup UI
     input = { enabled = true }, -- nicer vim.ui.input (e.g. LSP rename)
+    explorer = { enabled = true }, -- sidebar file tree (replaces netrw for browsing)
+    picker = { enabled = true }, -- the explorer is built on top of the picker
     -- Toggleable terminal. State persists: hide it and the shell keeps running.
     terminal = {},
   },
@@ -20,6 +22,7 @@ return {
     { "<c-/>", function() Snacks.terminal() end, desc = "Toggle terminal", mode = { "n", "t" } },
     { "<c-_>", function() Snacks.terminal() end, desc = "Toggle terminal", mode = { "n", "t" } },
     { "<leader>tt", function() Snacks.terminal() end, desc = "Toggle terminal" },
+    { "<leader>e", function() Snacks.explorer() end, desc = "Explorer" },
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss notifications" },
   },
 }
