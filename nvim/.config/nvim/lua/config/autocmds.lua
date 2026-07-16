@@ -66,6 +66,17 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Soft-wrap long lines in prose filetypes (code keeps wrap = false).
+-- linebreak wraps at word boundaries instead of mid-word.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("wrap_prose"),
+  pattern = { "markdown", "text", "gitcommit" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+  end,
+})
+
 -- Create missing parent directories when saving a new file
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("auto_create_dir"),

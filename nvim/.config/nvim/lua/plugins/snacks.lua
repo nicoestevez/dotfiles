@@ -12,7 +12,17 @@ return {
     notifier = { enabled = true }, -- vim.notify with a nicer popup UI
     input = { enabled = true }, -- nicer vim.ui.input (e.g. LSP rename)
     explorer = { enabled = true }, -- sidebar file tree (replaces netrw for browsing)
-    picker = { enabled = true }, -- the explorer is built on top of the picker
+    picker = {
+      enabled = true, -- the explorer is built on top of the picker
+      sources = {
+        explorer = {
+          -- Close the explorer when opening a file. Done via the jump
+          -- action, NOT auto_close: auto_close fires on any focus change
+          -- and leaves a half-closed picker that blocks reopening.
+          jump = { close = true },
+        },
+      },
+    },
     -- Toggleable terminal. State persists: hide it and the shell keeps running.
     terminal = {},
   },

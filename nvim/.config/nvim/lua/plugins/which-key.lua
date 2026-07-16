@@ -6,6 +6,7 @@ return {
   opts = {
     -- Label the keymap groups this config already uses
     spec = {
+      { "<leader>c", group = "code" },
       { "<leader>p", group = "project" },
       { "<leader>h", group = "git hunks" },
       { "<leader>g", group = "github" },

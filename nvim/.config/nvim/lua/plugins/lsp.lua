@@ -87,7 +87,7 @@ return {
           map("K", vim.lsp.buf.hover, "Hover docs")
           map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
           map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-          map("<leader>e", vim.diagnostic.open_float, "Show diagnostic")
+          map("<leader>cd", vim.diagnostic.open_float, "Show diagnostic")
           map("[d", function() vim.diagnostic.jump({ count = -1 }) end, "Previous diagnostic")
           map("]d", function() vim.diagnostic.jump({ count = 1 }) end, "Next diagnostic")
         end,
