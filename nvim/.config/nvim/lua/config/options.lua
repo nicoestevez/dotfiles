@@ -1,3 +1,7 @@
+-- Leader keys (must be set before keymaps are defined and before lazy.nvim loads)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- Line numbers (absolute on the cursor line, relative elsewhere)
 vim.opt.number = true
 vim.opt.relativenumber = true
