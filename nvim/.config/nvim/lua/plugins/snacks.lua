@@ -20,6 +20,7 @@ return {
           -- action, NOT auto_close: auto_close fires on any focus change
           -- and leaves a half-closed picker that blocks reopening.
           jump = { close = true },
+          hidden = true,
         },
       },
     },
