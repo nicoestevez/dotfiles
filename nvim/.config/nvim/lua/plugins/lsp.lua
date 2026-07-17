@@ -20,6 +20,7 @@ return {
         "vtsls", -- TypeScript / JavaScript
         "basedpyright", -- Python types
         "ruff", -- Python linting + formatting
+        "prismals", -- Prisma schema
       },
       -- Installed servers are enabled automatically via vim.lsp.enable().
       -- This is the default, spelled out so it's not a mystery.

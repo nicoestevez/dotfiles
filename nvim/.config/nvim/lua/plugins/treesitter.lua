@@ -16,6 +16,7 @@ local languages = {
   "json",
   "yaml",
   "toml",
+  "prisma",
   "markdown",
   "markdown_inline",
   "bash",
