@@ -44,6 +44,19 @@ return {
         },
       })
 
+      vim.lsp.config("vtsls", {
+        settings = {
+          typescript = {
+            tsserver = {
+              maxTsServerMemory = 6144,
+            },
+            preferences = {
+              includePackageJsonAutoImports = "off",
+            },
+          },
+        },
+      })
+
       vim.lsp.config("basedpyright", {
         settings = {
           basedpyright = {
