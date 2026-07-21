@@ -12,6 +12,7 @@ Each folder is a stow "package" whose internal structure mirrors `$HOME`. Runnin
 | `git/` | `.gitconfig` | Git configuration (identity lives in `~/.gitconfig.local`) |
 | `tmux/` | `.tmux.conf` | Tmux with vi mode, mouse support and session persistence (TPM) |
 | `nvim/` | `.config/nvim/` | Neovim with lazy.nvim, LSP (mason), Telescope, Treesitter |
+| `vscode/` | `.config/Code/User/settings.json` | VS Code user settings (extensions listed in `vscode/extensions.txt`) |
 
 ## Requirements
 
@@ -34,6 +35,11 @@ Each folder is a stow "package" whose internal structure mirrors `$HOME`. Runnin
 - `ripgrep` (for `Telescope live_grep`)
 - Plugins and LSP servers install themselves on first launch (lazy.nvim + mason)
 
+**VS Code:**
+
+- `code` on the `PATH` (the `install.sh` step is skipped if absent)
+- Extensions are reinstalled from `vscode/extensions.txt`, refresh it with `code --list-extensions > vscode/extensions.txt`
+
 **Optional** (the `.zshrc` detects these and skips them if absent): nvm, bun, mise, Google Cloud SDK, CUDA.
 
 ## Installation
@@ -52,13 +58,14 @@ After installing:
 
 1. **Tmux plugins** — inside tmux, press `prefix + I`
 2. **Neovim** — open `nvim`; lazy.nvim and mason download everything on first launch
+3. **VS Code** — the script installs the extensions from `vscode/extensions.txt` (needs `code` on the `PATH`)
 
 <details>
 <summary>Manual installation (without the script)</summary>
 
 ```bash
 cd ~/.dotfiles
-stow zsh git tmux nvim
+stow zsh git tmux nvim vscode
 ```
 
 And create `~/.gitconfig.local`:

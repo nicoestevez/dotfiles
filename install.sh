@@ -6,7 +6,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGES=(zsh git tmux nvim)
+PACKAGES=(zsh git tmux nvim vscode)
 
 info() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 warn() { printf '\033[1;33m==> WARN:\033[0m %s\n' "$*"; }
@@ -52,7 +52,14 @@ cd "$DOTFILES_DIR"
 stow --restow "${PACKAGES[@]}" ||
   fail "stow conflict: back up/remove the real files that already exist in \$HOME and retry"
 
-# --- 5. Git identity (kept out of the repo) ---
+# --- 5. VS Code extensions (settings.json is symlinked by stow) ---
+if command -v code >/dev/null && [ -f "$DOTFILES_DIR/vscode/extensions.txt" ]; then
+  info "Installing VS Code extensions..."
+  xargs -n1 code --install-extension < "$DOTFILES_DIR/vscode/extensions.txt" || \
+    warn "some VS Code extensions failed to install"
+fi
+
+# --- 6. Git identity (kept out of the repo) ---
 if [ ! -f "$HOME/.gitconfig.local" ]; then
   info "Setting up git identity (stored in ~/.gitconfig.local, not in the repo)"
   read -rp "  Name:  " git_name
