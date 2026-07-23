@@ -34,6 +34,9 @@ return {
     { "<c-_>", function() Snacks.terminal() end, desc = "Toggle terminal", mode = { "n", "t" } },
     { "<leader>tt", function() Snacks.terminal() end, desc = "Toggle terminal" },
     { "<leader>e", function() Snacks.explorer() end, desc = "Explorer" },
+    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+    { "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit current file history" },
+    { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit log (cwd)" },
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss notifications" },
   },
 }
