@@ -11,10 +11,10 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- 'default' keeps Vim's own completion feel: <C-y> accepts,
-    -- <C-n>/<C-p> move, <C-e> dismisses, <C-space> opens the menu.
-    -- Swap for 'super-tab' if you want VSCode-style Tab to accept.
-    keymap = { preset = "default" },
+    -- 'super-tab' gives VSCode-style completion: <Tab> accepts,
+    -- <S-Tab>/<Tab> move through the list, <C-e> dismisses,
+    -- <C-space> opens the menu. <C-y> still accepts too.
+    keymap = { preset = "super-tab" },
 
     appearance = { nerd_font_variant = "mono" },
 
