@@ -112,6 +112,15 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# eza: ls with icons (requires a Nerd Font in the terminal)
+if command -v eza >/dev/null; then
+  alias ls='eza --icons=always'
+  alias ll='eza -l --icons=always'
+  alias la='eza -la --icons=always'
+  alias lt='eza --tree --level=1 --icons=always'
+fi
+
 if [ -f "$HOME/.local/bin/env" ]; then
   . "$HOME/.local/bin/env"
 fi
