@@ -42,6 +42,17 @@ return {
       },
     })
 
+    -- Telescope 0.1.x highlights previews through the pre-1.0 nvim-treesitter
+    -- API (parsers.ft_to_lang), which the `main` branch dropped. Swap it for
+    -- the treesitter API built into Neovim.
+    require("telescope.previewers.utils").ts_highlighter = function(bufnr, ft)
+      local lang = vim.treesitter.language.get_lang(ft)
+      if not lang then
+        return false
+      end
+      return (pcall(vim.treesitter.start, bufnr, lang))
+    end
+
     pcall(telescope.load_extension, "fzf")
   end,
 }
