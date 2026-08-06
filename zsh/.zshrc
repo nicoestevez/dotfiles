@@ -161,3 +161,6 @@ export EDITOR=nvim
 
 # Machine-specific config (not versioned): aliases, secrets, local paths.
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+
+# Force Qt apps to use Wayland backend (xcb/X11 fails in this GNOME Wayland session)
+export QT_QPA_PLATFORM=wayland
