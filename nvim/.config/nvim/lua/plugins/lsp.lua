@@ -58,6 +58,14 @@ return {
       })
 
       vim.lsp.config("basedpyright", {
+        -- Every project keeps its venv at <root>/.venv (uv's default). Pyright
+        -- wants an absolute interpreter path, and root_dir is only known once
+        -- the client is about to start, hence before_init.
+        before_init = function(_, config)
+          config.settings = config.settings or {}
+          config.settings.python = config.settings.python or {}
+          config.settings.python.pythonPath = config.root_dir .. "/.venv/bin/python"
+        end,
         settings = {
           basedpyright = {
             analysis = {
