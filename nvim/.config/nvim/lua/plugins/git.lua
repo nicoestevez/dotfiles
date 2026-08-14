@@ -4,6 +4,7 @@ return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPre", "BufNewFile" },
   opts = {
+    attach_to_untracked = true,
     on_attach = function(bufnr)
       local gs = require("gitsigns")
 
@@ -16,6 +17,13 @@ return {
       map("n", "[c", function() gs.nav_hunk("prev") end, "Previous hunk")
 
       map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
+      map("v", "<leader>hs", function()
+        gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+      end, "Stage selected lines")
+      map("n", "<leader>hS", gs.stage_buffer, "Stage buffer")
+      -- Only undoes stages made in this session
+      map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
+      map("n", "<leader>hU", gs.reset_buffer_index, "Unstage buffer")
       map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
       map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
       map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame line")
