@@ -26,6 +26,7 @@ return {
       map("n", "<leader>hU", gs.reset_buffer_index, "Unstage buffer")
       map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
       map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
+      map("n", "<leader>hi", gs.preview_hunk_inline, "Preview hunk inline")
       map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame line")
       map("n", "<leader>hd", gs.diffthis, "Diff against index")
       -- Inline blame, off by default because it's distracting while typing
