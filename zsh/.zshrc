@@ -164,3 +164,10 @@ export EDITOR=nvim
 
 # Force Qt apps to use Wayland backend (xcb/X11 fails in this GNOME Wayland session)
 export QT_QPA_PLATFORM=wayland
+
+# >>> railway initialize >>>
+source "$HOME/.railway/env"
+# <<< railway initialize <<<
+
+# draw.io (Flatpak)
+alias drawio='flatpak run com.jgraph.drawio.desktop'
