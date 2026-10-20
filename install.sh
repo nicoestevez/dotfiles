@@ -6,7 +6,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGES=(zsh git tmux nvim vscode)
+PACKAGES=(zsh git tmux nvim vscode kitty)
 
 info() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 warn() { printf '\033[1;33m==> WARN:\033[0m %s\n' "$*"; }
