@@ -246,7 +246,7 @@ show_agent_labels_on_pane_borders = true
 # delivery = "off"
 # delay_seconds = 1
 
-delivery = "off"
+delivery = "system"
 [ui.toast.herdr]
 # position = "bottom-right"
 
@@ -288,7 +288,7 @@ delivery = "off"
 # allow_nested = false
 # Experimental local Kitty graphics rendering for attached clients.
 # Requires a Kitty graphics-compatible outer terminal.
-# kitty_graphics = false
+kitty_graphics = true
 # Save recent pane screen history across full server restarts.
 pane_history = true
 # While prefix mode is active, temporarily switch the macOS host input
@@ -311,6 +311,7 @@ pane_history = true
 # Values: block, steady_block (default), underline, steady_underline, bar, steady_bar.
 # cjk_ime_cursor_shape = "steady_block"
 
+switch_ascii_input_source_in_prefix = false
 [advanced]
 # Maximum scrollback buffer size in bytes retained per pane terminal.
 # Matches Ghostty's default scrollback-limit behavior.
