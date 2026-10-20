@@ -24,6 +24,9 @@ return {
         },
       },
     },
+    -- Inline image/PDF viewer. Needs a terminal with graphics support
+    -- (kitty) plus ImageMagick for PDFs, SVGs and other conversions.
+    image = { enabled = true },
     -- Toggleable terminal. State persists: hide it and the shell keeps running.
     terminal = {},
   },
