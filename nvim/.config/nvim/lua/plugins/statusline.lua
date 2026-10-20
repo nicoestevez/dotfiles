@@ -13,6 +13,12 @@ return {
     },
     sections = {
       lualine_c = { { "filename", path = 1 } }, -- path relative to cwd
+      lualine_z = {
+        function()
+          return string.format("Tab %d/%d", vim.fn.tabpagenr(), vim.fn.tabpagenr("$"))
+        end,
+        "location",
+      },
     },
   },
 }
