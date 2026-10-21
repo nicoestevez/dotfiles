@@ -1,0 +1,7 @@
+# Runtime files herdr writes next to its config (stow folds ~/.config/herdr into this directory, so they would otherwise show up as untracked).
+*.log
+*.sock
+session.json
+session-history.json
+session-snapshots/
+.plugins.lock
