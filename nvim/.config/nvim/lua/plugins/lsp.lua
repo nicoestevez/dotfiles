@@ -62,6 +62,11 @@ return {
         -- wants an absolute interpreter path, and root_dir is only known once
         -- the client is about to start, hence before_init.
         before_init = function(_, config)
+          -- root_dir is nil for a standalone file outside any project (no
+          -- pyproject/.git above it); let pyright use the PATH interpreter then.
+          if not config.root_dir then
+            return
+          end
           config.settings = config.settings or {}
           config.settings.python = config.settings.python or {}
           config.settings.python.pythonPath = config.root_dir .. "/.venv/bin/python"
