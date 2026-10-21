@@ -26,6 +26,22 @@ if [ ${#missing[@]} -gt 0 ]; then
   fail "base dependencies incomplete"
 fi
 
+# nvim-treesitter (main branch) compiles its parsers locally and needs a C
+# compiler plus the tree-sitter CLI. Not fatal, but without them nvim shows
+# no syntax highlighting for most filetypes.
+for cmd in cc tree-sitter; do
+  command -v "$cmd" >/dev/null || warn "'$cmd' not found: nvim-treesitter cannot compile parsers (Arch: sudo pacman -S base-devel tree-sitter-cli; without sudo: npm install -g tree-sitter-cli)"
+done
+# conform.nvim formats Lua with stylua on save; without it, it falls back to
+# lua_ls and re-indents the config to 4 spaces. Mason installs it from nvim.
+command -v stylua >/dev/null || [ -x "$HOME/.local/share/nvim/mason/bin/stylua" ] ||
+  warn "'stylua' not found: run :MasonInstall stylua inside nvim (or sudo pacman -S stylua)"
+# External tools nvim shells out to: ripgrep for Telescope live_grep, lazygit
+# for the snacks.nvim <leader>gg / <leader>gl / <leader>gf keymaps.
+for cmd in rg lazygit; do
+  command -v "$cmd" >/dev/null || warn "'$cmd' not found: nvim keymaps that use it will fail (Arch: sudo pacman -S ripgrep lazygit; without sudo: mise use -g ripgrep lazygit; macOS: brew install ripgrep lazygit)"
+done
+
 # --- 2. Oh My Zsh ---
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   info "Installing Oh My Zsh..."

@@ -35,6 +35,8 @@ Each folder is a stow "package" whose internal structure mirrors `$HOME`. Runnin
 - `ripgrep` (for `Telescope live_grep`)
 - Plugins and LSP servers install themselves on first launch (lazy.nvim + mason)
 
+- [`lazygit`](https://github.com/jesseduffield/lazygit) (for the `<leader>gg` / `<leader>gl` / `<leader>gf` keymaps via snacks.nvim). Both are system packages: `pacman -S ripgrep lazygit`, `brew install ripgrep lazygit`, or `mise use -g ripgrep lazygit` without sudo; `install.sh` warns if they are missing
+- `tree-sitter-cli` and a C compiler (nvim-treesitter compiles its parsers locally; `install.sh` warns if they are missing)
 **VS Code:**
 
 - `code` on the `PATH` (the `install.sh` step is skipped if absent)
