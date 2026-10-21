@@ -45,6 +45,20 @@ return {
           return
         end
 
+        -- The parser may be listed but not compiled (e.g. the `tree-sitter`
+        -- CLI or a C compiler was missing when :TSInstall ran). Warn once
+        -- instead of erroring on every buffer.
+        if not vim.treesitter.language.add(lang) then
+          vim.notify_once(
+            ("nvim-treesitter: parser for '%s' is not installed. Install the tree-sitter CLI and run :TSInstall %s"):format(
+              lang,
+              lang
+            ),
+            vim.log.levels.WARN
+          )
+          return
+        end
+
         vim.treesitter.start() -- highlighting (built into Neovim)
 
         -- Folding (built into Neovim). Folds start open; use zc to close one.
