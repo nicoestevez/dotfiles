@@ -13,6 +13,8 @@ Each folder is a stow "package" whose internal structure mirrors `$HOME`. Runnin
 | `tmux/` | `.tmux.conf` | Tmux with vi mode, mouse support and session persistence (TPM) |
 | `nvim/` | `.config/nvim/` | Neovim with lazy.nvim, LSP (mason), Telescope, Treesitter |
 | `vscode/` | `.config/Code/User/settings.json` | VS Code user settings (extensions listed in `vscode/extensions.txt`) |
+| `kitty/` | `.config/kitty/kitty.conf` | Kitty as the outer terminal for herdr (FiraCode Nerd Font, graphics protocol, hidden tab bar) |
+| `herdr/` | `.config/herdr/config.toml` | [herdr](https://herdr.dev) terminal multiplexer (catppuccin theme, `ctrl+s` prefix, vim-style pane navigation) |
 
 ## Requirements
 
@@ -33,10 +35,15 @@ Each folder is a stow "package" whose internal structure mirrors `$HOME`. Runnin
 
 - Neovim ≥ 0.10
 - `ripgrep` (for `Telescope live_grep`)
-- Plugins and LSP servers install themselves on first launch (lazy.nvim + mason)
-
 - [`lazygit`](https://github.com/jesseduffield/lazygit) (for the `<leader>gg` / `<leader>gl` / `<leader>gf` keymaps via snacks.nvim). Both are system packages: `pacman -S ripgrep lazygit`, `brew install ripgrep lazygit`, or `mise use -g ripgrep lazygit` without sudo; `install.sh` warns if they are missing
 - `tree-sitter-cli` and a C compiler (nvim-treesitter compiles its parsers locally; `install.sh` warns if they are missing)
+- Plugins and LSP servers install themselves on first launch (lazy.nvim + mason)
+
+**Kitty + herdr:**
+
+- `kitty` from the system package manager (e.g. `pacman -S kitty`) plus the *FiraCode Nerd Font Mono* font, which `kitty.conf` references by name
+- [herdr](https://herdr.dev): `install.sh` installs it with `curl -fsSL https://herdr.dev/install.sh | sh` if it is not on the `PATH`; update later with `herdr update`
+
 **VS Code:**
 
 - `code` on the `PATH` (the `install.sh` step is skipped if absent)
@@ -52,7 +59,7 @@ cd ~/.dotfiles
 ./install.sh
 ```
 
-The script is idempotent: it checks the base programs, installs Oh My Zsh / Powerlevel10k / zsh plugins / TPM if missing, runs `stow`, and prompts for your git identity if `~/.gitconfig.local` doesn't exist.
+The script is idempotent: it checks the base programs, installs Oh My Zsh / Powerlevel10k / zsh plugins / TPM / herdr if missing, runs `stow`, and prompts for your git identity if `~/.gitconfig.local` doesn't exist.
 
 > If a real file (not a symlink) already exists in `$HOME`, stow will fail with a conflict warning. Back up/remove the original file and re-run the script.
 
@@ -61,13 +68,14 @@ After installing:
 1. **Tmux plugins** — inside tmux, press `prefix + I`
 2. **Neovim** — open `nvim`; lazy.nvim and mason download everything on first launch
 3. **VS Code** — the script installs the extensions from `vscode/extensions.txt` (needs `code` on the `PATH`)
+4. **herdr** — open kitty and run `herdr`; its config is already linked at `~/.config/herdr/config.toml`
 
 <details>
 <summary>Manual installation (without the script)</summary>
 
 ```bash
 cd ~/.dotfiles
-stow zsh git tmux nvim vscode
+stow zsh git tmux nvim vscode kitty herdr
 ```
 
 And create `~/.gitconfig.local`:

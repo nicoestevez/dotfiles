@@ -62,20 +62,27 @@ clone_if_missing zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosugg
 clone_if_missing zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 clone_if_missing tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 
-# --- 4. Symlinks ---
+# --- 4. herdr (terminal multiplexer; the config in herdr/ assumes it exists) ---
+if ! command -v herdr >/dev/null; then
+  info "Installing herdr..."
+  curl -fsSL https://herdr.dev/install.sh | sh ||
+    warn "herdr install failed; install it manually: curl -fsSL https://herdr.dev/install.sh | sh"
+fi
+
+# --- 5. Symlinks ---
 info "Creating symlinks with stow: ${PACKAGES[*]}"
 cd "$DOTFILES_DIR"
 stow --restow "${PACKAGES[@]}" ||
   fail "stow conflict: back up/remove the real files that already exist in \$HOME and retry"
 
-# --- 5. VS Code extensions (settings.json is symlinked by stow) ---
+# --- 6. VS Code extensions (settings.json is symlinked by stow) ---
 if command -v code >/dev/null && [ -f "$DOTFILES_DIR/vscode/extensions.txt" ]; then
   info "Installing VS Code extensions..."
   xargs -n1 code --install-extension < "$DOTFILES_DIR/vscode/extensions.txt" || \
     warn "some VS Code extensions failed to install"
 fi
 
-# --- 6. Git identity (kept out of the repo) ---
+# --- 7. Git identity (kept out of the repo) ---
 if [ ! -f "$HOME/.gitconfig.local" ]; then
   info "Setting up git identity (stored in ~/.gitconfig.local, not in the repo)"
   read -rp "  Name:  " git_name
@@ -87,3 +94,4 @@ info "Done. Final steps:"
 echo "  - If zsh is not your default shell: chsh -s \$(which zsh)"
 echo "  - Inside tmux, press prefix + I to install plugins (TPM)"
 echo "  - Open nvim: lazy.nvim and mason install everything on first launch"
+echo "  - Launch herdr inside kitty; its config is ~/.config/herdr/config.toml"
