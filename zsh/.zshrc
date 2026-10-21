@@ -166,7 +166,7 @@ export EDITOR=nvim
 export QT_QPA_PLATFORM=wayland
 
 # >>> railway initialize >>>
-source "$HOME/.railway/env"
+[ -f "$HOME/.railway/env" ] && source "$HOME/.railway/env"
 # <<< railway initialize <<<
 
 # draw.io (Flatpak)
