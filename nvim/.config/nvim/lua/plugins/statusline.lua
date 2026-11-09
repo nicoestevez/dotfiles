@@ -1,6 +1,7 @@
 -- Status line: current mode, git branch, diagnostics count, file position.
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = { "codeowners.nvim" },
   event = "VeryLazy",
   opts = {
     options = {
@@ -12,7 +13,12 @@ return {
       globalstatus = true, -- one bar for all splits, not one each
     },
     sections = {
-      lualine_c = { { "filename", path = 1 } }, -- path relative to cwd
+      lualine_c = {
+        { "filename", path = 1 }, -- path relative to cwd
+        function()
+          return require("codeowners").codeowners()
+        end,
+      },
       lualine_z = {
         function()
           return string.format("Tab %d/%d", vim.fn.tabpagenr(), vim.fn.tabpagenr("$"))
