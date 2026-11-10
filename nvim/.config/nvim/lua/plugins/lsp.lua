@@ -21,6 +21,7 @@ return {
         "basedpyright", -- Python types
         "ruff", -- Python linting + formatting
         "prismals", -- Prisma schema
+        "ruby_lsp", -- Ruby; Rails support is loaded through ruby-lsp-rails
       },
       -- Installed servers are enabled automatically via vim.lsp.enable().
       -- This is the default, spelled out so it's not a mystery.
@@ -28,6 +29,24 @@ return {
     },
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
+
+      vim.lsp.config("ruby_lsp", {
+        -- Packs may contain Gemfiles without a lockfile; use the repository bundle.
+        root_markers = { ".git", "Gemfile" },
+      })
+
+      -- Ruby LSP delegates references and rename to Sorbet in typed projects.
+      vim.lsp.config("sorbet", {
+        -- Buffer edits arrive over LSP; Watchman is not installed on this host.
+        cmd = { "bundle", "exec", "srb", "tc", "--lsp", "--disable-watchman" },
+        root_dir = function(bufnr, on_dir)
+          local root = vim.fs.root(bufnr, { ".git", "Gemfile" })
+          if root and vim.uv.fs_stat(root .. "/sorbet/config") then
+            on_dir(root)
+          end
+        end,
+      })
+      vim.lsp.enable("sorbet")
 
       -- Per-server tweaks. On Neovim 0.11+ this is vim.lsp.config(), which
       -- replaces the old require("lspconfig").server.setup({}) you'll see
